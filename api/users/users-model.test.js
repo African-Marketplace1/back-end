@@ -20,4 +20,13 @@ describe("users-model", () => {
   it("is the correct testing environment", async () => {
     expect(process.env.NODE_ENV).toBe("testing");
   });
+  describe("getById", () => {
+    it("returns an object with username, password", async () => {
+      const response = await User.getById(1);
+      const username = response.username;
+      expect(username).toBe("bmenz");
+      expect(response).toHaveProperty("username");
+      expect(response).toHaveProperty("password");
+    });
+  });
 });
