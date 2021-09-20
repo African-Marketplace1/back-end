@@ -125,7 +125,7 @@ response body:
 ```
 
 ```
-[POST] /users
+[POST] /users/register
 
 request body:
 
@@ -174,6 +174,28 @@ response body:
     username: 'ab_caloo'
  },
  img: 'http://website.com/img'
+}
+```
+
+```
+[POST] /users/login
+
+request body:
+
+{
+  username:"ab_caloo",
+  password:"abc456"
+}
+
+response body:
+
+{
+  "user_id": 2,
+  "username": "ab_caloo",
+  "password": "abc456",
+  "email": "ab@gmail.com",
+  "img": null,
+  "location": "567M+V8 Luanda, Angola"
 }
 ```
 

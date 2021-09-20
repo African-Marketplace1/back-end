@@ -28,5 +28,35 @@ describe("users-model", () => {
       expect(response).toHaveProperty("username");
       expect(response).toHaveProperty("password");
     });
+    it("Returns correct shape", async () => {
+      const expected = {
+        user_id: 2,
+        username: "ab_caloo",
+        password: "abc456",
+        email: "ab@gmail.com",
+        img: null,
+        location: "567M+V8 Luanda, Angola",
+        products: [
+          {
+            product_id: 4,
+            name: "Milk",
+            price_usd: 4.99,
+            description: "500 ml per bottle",
+            img: "https://images.pexels.com/photos/7573152/pexels-photo-7573152.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+            category_name: "Animal Products",
+          },
+          {
+            product_id: 5,
+            name: "Limes",
+            price_usd: 5.99,
+            description: "2 Limes per purchase",
+            img: "https://crownmarketonline.com/wp-content/uploads/2020/05/Limes.jpg",
+            category_name: "Fruits",
+          },
+        ],
+      };
+      const actual = await User.getById(2);
+      expect(actual).toEqual(expected);
+    });
   });
 });
