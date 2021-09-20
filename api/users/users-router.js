@@ -19,7 +19,11 @@ router.post("/login", async (req, res, next) => {
       const token = buildToken(user);
       res
         .status(200)
-        .json({ message: `Welcome back ${user.username}`, token: token });
+        .json({
+          message: `Welcome back ${user.username}`,
+          token: token,
+          user: user,
+        });
     } else {
       next({ status: 401, message: "Invalid Credentials" });
     }

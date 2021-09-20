@@ -130,21 +130,21 @@ response body:
 request body:
 
 {
- username: 'abc',
- password: 'def,
- email: 'abc@gmail.com',
- location: '123 tulip lane, Cairo, Egypt, 101010' //optional
+    "username":"bobby",
+    "password":"abc123",
+    "email": "bobby@gmail.com",
+    "location": "123 cherry hill, Cairo, Egypt, 101010" // optional
 }
 
 response body:
 
 {
- user_id: 6
- username: 'abc',
- password: 'def,
- email: 'abc@gmail.com',
- location: '123 tulip lane, Cairo, Egypt, 101010' //optional
- img: NULL // user can upload later
+    "user_id": 13,
+    "username": "bobby",
+    "password": "$2a$08$AefzhAN1hBKixERUZ.7dz.5/EDji.MTKJbXkMgWSZSnswHpOJGDzu", //password is hashed for security measures
+    "email": "bobby@gmail.com",
+    "img": null,
+    "location": "123 cherry hill, Cairo, Egypt, 101010"
 }
 ```
 
@@ -183,19 +183,23 @@ response body:
 request body:
 
 {
-  username:"ab_caloo",
-  password:"abc456"
+    "username":"bobby",
+    "password":"abc123"
 }
 
 response body:
 
 {
-  "user_id": 2,
-  "username": "ab_caloo",
-  "password": "abc456",
-  "email": "ab@gmail.com",
-  "img": null,
-  "location": "567M+V8 Luanda, Angola"
+    "message": "Welcome back bobby",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxMywidXNlcm5hbWUiOiJib2JieSIsImlhdCI6MTYzMjE3NDIxNSwiZXhwIjoxNjMyMzQ3MDE1fQ.jlxHw6gO2NJqv__DiLMPYbD4zA_XqcMVw6-ro2KDS2o",
+    "user": {
+        "user_id": 13,
+        "username": "bobby",
+        "password": "$2a$08$AefzhAN1hBKixERUZ.7dz.5/EDji.MTKJbXkMgWSZSnswHpOJGDzu",
+        "email": "bobby@gmail.com",
+        "img": null,
+        "location": "123 cherry hill, Cairo, Egypt, 101010"
+    }
 }
 ```
 
