@@ -1,5 +1,5 @@
 ```
-[GET] /user/:id
+[GET] /users/:id
 
 returns a specific user
 
