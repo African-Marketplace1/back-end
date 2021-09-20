@@ -1,234 +1,183 @@
- ```
- [GET] /users/:id
- 
-response body will be:
-
-  {
-    user_id: "1",
-    username: "bmenz",
-    password: "alksdhfpaiweihasd",
-    email: "bmenz@gmail.com",
-    img: "www.aws.com/img/1",
-    products: [
-      {
-        product_id: 1,
-        name: "Eggs",
-        price_usd: 5.99,
-        quantity: 12,
-        description: "12 per pack",
-        img: "www.aws.com/img/a",
-        category: "Animal Products",
-      },
-      {
-        product_id: 9,
-        name: "Avocado",
-        price_usd: 2.99,
-        quantity: 31,
-        description: "1 avocado per purchase",
-        img: "www.aws.com/img/i",
-        category: "Fruits",
-      },
-      {
-        product_id: 10,
-        name: "Limes",
-        price_usd: 5.99,
-        quantity: 12,
-        description: "2 limes per purchase",
-        img: "www.aws.com/img/j",
-        category: "Fruits",
-      },
-      {
-        product_id: 16,
-        name: "Spring Onions",
-        price_usd: 7.99,
-        quantity: 18,
-        description: "4 onions per bag",
-        img: "www.aws.com/img/p",
-        category: "Vegetables",
-      },
-    ],
-    orders_placed: [
-      {
-        order_id: 2,
-        status: "completed",
-        date: "2021-09-18 12:30:40.138888-01",
-        shipping_method: "standard",
-        deliveryAddress: {
-          firstName: "Brian",
-          lastName: "Menz",
-          address: "18 coney street",
-          city: "Laplanga",
-          country: "Morrocco",
-          zip: "07712",
-        },
-        products: [
-          {
-            product_id: 2,
-            name: "Milk",
-            price_usd: 4.99,
-            quantity: 1,
-            seller: "ab_caloo",
-          },
-          {
-            product_id: 12,
-            name: "Pidgeon Peas",
-            price_usd: 5.99,
-            quantity: 12,
-            seller: "lulu_app",
-          },
-          {
-            product_id: 13,
-            name: "Cassava Chips",
-            price_usd: 5.99,
-            quantity: 12,
-            seller: "lulu_app",
-          },
-        ],
-      },
-    ],
-    sales: [
-      {
-        order_id: 1,
-        shipping_method: "standard",
-        buyer: {
-          username: "hfgool",
-          email: "gool@gmail.com",
-          firstName: "Bob",
-          lastName: "Saget",
-          address: "151 Washington Road",
-          city: "Robinsville",
-          country: "United States",
-          zip: "01234",
-        },
-        products: [
-          {
-            product_id: 16,
-            product_name: "Spring Onions",
-            quantity: 1,
-          },
-        ],
-      },
-    ],
-  };
-
 ```
+[GET] /user/:id
 
-```
-[GET] /users
+returns a specific user
 
 response body:
 
-Returns a collection of users. Each user has the same shape as /users/:id.
+{
+ user_id: 1,
+ username: 'bmenz',
+ password: 'asdf234.asdf3048.adsh23r4',
+ email: 'bmenz@gmail.com',
+ img: 'www.aws.com/img/1',
+ location: '529W+7X Harare, Zimbabwe'
+ products: [
+  { 
+  product_id: 3, 
+  name: 'Beans Rosecoco', 
+  price: 6.50, 
+  description: '2lbs per bag', 
+  img: 'www.aws.com/img/b', 
+  category: 'Beans'
+  },
+  { 
+  product_id: 10, 
+  name: 'Limes', 
+  price: 5.99, 
+  description: '2 limes per purchase', 
+  img: 'www.aws.com/img/j', 
+  category: 'Fruits'
+  },
+ ]
+}
+```
 
-[{user1}, {user2}, {user3}... ]
+```
+[GET] /categories
+
+returns all categories
+
+reponse body:
+
+[
+{category_id: 1, name: 'Animal Products'},
+{category_id: 2, name: 'Beans'},
+{category_id: 3, name: 'Cereals'},
+{category_id: 4, name: 'Fruits'},
+...
+]
+```
+
+```
+[GET] /categories/products
+
+returns products from a specific category
+
+response body:
+
+{
+category_id: 1,
+name: 'Animal Products',
+products: [
+ {
+  product_id: 1, 
+  name: 'Eggs', 
+  price: 5.99, 
+  description: '12 per pack', 
+  img: 'www.aws.com/img/a',
+  seller: 
+  {
+   seller_id: 1,
+   username: 'bmenz'
+  }
+ },
+  {
+  product_id: 2, 
+  name: 'Milk', 
+  price: 4.99, 
+  description: '500ml per bottle', 
+  img: 'www.aws.com/img/b', 
+  seller: 
+  {
+   seller_id: 2,
+   username: 'ab_caloo'
+  }
+ },
+ ]
+}
+```
+
+```
+[GET} /products
+
+returns all products
+
+response body: 
+[
+ {
+  product_id: 1, 
+  name: 'Eggs', 
+  price: 5.99, 
+  description: '12 per pack', 
+  img: 'www.aws.com/img/a',
+  category: 'Animal Products'
+  seller: 
+  {
+   seller_id: 1,
+   username: 'bmenz'
+  }
+ },
+  {
+  product_id: 2, 
+  name: 'Milk', 
+  price: 4.99, 
+  description: '500ml per bottle', 
+  img: 'www.aws.com/img/b', 
+  category: 'Animal Products'
+  seller: 
+  {
+   seller_id: 2,
+   username: 'ab_caloo'
+  }
+ },
+ ]
 ```
 
 ```
 [POST] /users
 
-request body should be:
+request body:
 
 {
-  username: 'abcdef',
-  password: 'ghijkll,
-  email: 'test@gmail.com'
+ username: 'abc',
+ password: 'def,
+ email: 'abc@gmail.com',
+ location: '123 tulip lane, Cairo, Egypt, 101010' //optional
 }
 
-response body will be:
+response body: 
 
 {
-  user_id: 6,
-  username: 'abcdef,
-  password: 'ghijkl,
-  email: 'test@gmail.com'
-}
-```
-
-```
-[GET] /products
-
-returns ALL products
-
-response body will be:
-
-[
-  {
-  product_id: 1, 
-  name: 'Eggs', 
-  price_usd: 5.99, 
-  quantity: 12, 
-  description: '12 per pack', 
-  seller_id: 1, 
-  username: 'bmenz', 
-  img: 'www.aws.com/img/a', 
-  category: 'Animal Product'
-  },
-  {
-  product_id: 2, 
-  name: 'Milk', 
-  price_usd: 4.99, 
-  quantity: 15, 
-  description: '1L per bottle', 
-  seller_id: 2, 
-  username: 'ab_caloo', 
-  img: 'www.aws.com/img/b', 
-  category: 'Animal Product'
-  },
-  ...
-]
-```
-
-```
-[GET] /products/:id
-
-returns all the products for a specific user
-```
-
-```
-[POST] /products/:id
-
-adds a new product to a specified user
-```
-
-```
-[GET] /orders/:id 
-
-returns all the orders that a user has made
-```
-
-```
-[POST] /orders
-
-creates a new order
-
-request object should be shaped like this:
-
-{
-  buyer: {
-    first_name: 'John',
-    last_name: 'Wick,
-    address: '12 laurel St.',
-    city: 'New York City',
-    country: 'United States',
-    zip: '07747'
-    },
-  payment: {
-    card_number: '1234123412341234',
-    expiration: '2/24',
-    CVV: '722'
-  }
-  products: [
-    {product_id: 1, quantity_ordered: 1},
-    {product_id: 4, quantity_ordered: 2}
-    ]
+ user_id: 6
+ username: 'abc',
+ password: 'def,
+ email: 'abc@gmail.com',
+ location: '123 tulip lane, Cairo, Egypt, 101010' //optional
+ img: NULL // user can upload later
 }
 ```
 
 ```
-[GET] /sales:id
+[POST] /users/:id/products
 
-returns all the sales that a user has made
+request body:
+
+{
+ name: 'banana',
+ price_usd: 1.99,
+ description: 'tasty yummy yummy',
+ category: 'Fruits' //should come froma a select menu
+ img: 'http://website.com/img'
+}
+
+response body: 
+
+{
+ product_id: 17,
+ name: 'banana',
+ price_usd: 1.99,
+ description: 'tasty yummy yummy',
+ category: 'Fruits',
+ seller: {
+    seller_id: 2,
+    username: 'ab_caloo'
+ },
+ img: 'http://website.com/img'
+}
 ```
+
+
 
 # Build Week Scaffolding for Node and PostgreSQL
 
