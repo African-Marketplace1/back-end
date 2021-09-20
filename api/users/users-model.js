@@ -1,6 +1,6 @@
 const db = require("../data/db-config");
 
-const getById = async (id) => {
+const getUserById = async (id) => {
   const user = await db("users").where("user_id", id).first();
   const products = await db("products as p")
     .select("p.*", "c.category_name")
@@ -17,14 +17,36 @@ const getById = async (id) => {
   return returnObj;
 };
 
-const getBy = async (filter) => {
+const getUserBy = async (filter) => {
   return await db("users").where(filter).first();
 };
 
-const add = async (newUser) => {
+const addUser = async (newUser) => {
   const { username } = newUser;
   await db("users").insert(newUser);
-  return await getBy({ username });
+  return await getUserBy({ username });
 };
 
-module.exports = { getById, getBy, add };
+const addProduct = async (seller_id, category_id, newProduct) => {
+  await db("products").insert({
+    seller: seller_id,
+    ...newProduct,
+    category: category_id,
+  });
+  return db("products").where("seller", seller_id);
+};
+
+const getCategoryByName = async (name) => {
+  const category = await db("categories").where("category_name", name).first();
+  return category.category_id;
+  // .first().category_id;
+  // return category_id;
+};
+
+module.exports = {
+  getUserById,
+  getUserBy,
+  addUser,
+  addProduct,
+  getCategoryByName,
+};

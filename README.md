@@ -125,7 +125,7 @@ response body:
 ```
 
 ```
-[POST] /users/register
+[POST] /users/register (creating a new user)
 
 request body:
 
@@ -149,7 +149,7 @@ response body:
 ```
 
 ```
-[POST] /users/:id/products
+[POST] /users/:id (adding a new product)
 
 request body:
 
@@ -157,28 +157,56 @@ request body:
  name: 'banana',
  price_usd: 1.99,
  description: 'tasty yummy yummy',
- category: 'Fruits' //should come froma a select menu
- img: 'http://website.com/img'
+ category: 'Fruits' //should come from a select menu
+ img: 'http://website.com/img' //optional
 }
 
 response body:
 
-{
- product_id: 17,
- name: 'banana',
- price_usd: 1.99,
- description: 'tasty yummy yummy',
- category: 'Fruits',
- seller: {
-    seller_id: 2,
-    username: 'ab_caloo'
- },
- img: 'http://website.com/img'
-}
+(returns all the products for the user, including the new product)
+
+[
+    {
+        "product_id": 4,
+        "name": "Milk",
+        "price_usd": 4.99,
+        "description": "500 ml per bottle",
+        "seller": 2,
+        "img": "https://images.pexels.com/photos/7573152/pexels-photo-7573152.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+        "category": 1
+    },
+    {
+        "product_id": 5,
+        "name": "Limes",
+        "price_usd": 5.99,
+        "description": "2 Limes per purchase",
+        "seller": 2,
+        "img": "https://crownmarketonline.com/wp-content/uploads/2020/05/Limes.jpg",
+        "category": 4
+    },
+    {
+        "product_id": 6,
+        "name": "banana",
+        "price_usd": 1.99,
+        "description": "tasty yummy yummy",
+        "seller": 2,
+        "img": "http://website.com/img",
+        "category": 4
+    },
+    {
+        "product_id": 7,
+        "name": "banana",
+        "price_usd": 1.99,
+        "description": "tasty yummy yummy",
+        "seller": 2,
+        "img": "http://website.com/img",
+        "category": 4
+    }
+]
 ```
 
 ```
-[POST] /users/login
+[POST] /users/login (for logging in)
 
 request body:
 
