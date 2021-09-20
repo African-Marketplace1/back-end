@@ -13,20 +13,20 @@ response body:
  img: 'www.aws.com/img/1',
  location: '529W+7X Harare, Zimbabwe'
  products: [
-  { 
-  product_id: 3, 
-  name: 'Beans Rosecoco', 
-  price: 6.50, 
-  description: '2lbs per bag', 
-  img: 'www.aws.com/img/b', 
+  {
+  product_id: 3,
+  name: 'Beans Rosecoco',
+  price_usd: 6.50,
+  description: '2lbs per bag',
+  img: 'www.aws.com/img/b',
   category: 'Beans'
   },
-  { 
-  product_id: 10, 
-  name: 'Limes', 
-  price: 5.99, 
-  description: '2 limes per purchase', 
-  img: 'www.aws.com/img/j', 
+  {
+  product_id: 10,
+  name: 'Limes',
+  price_usd: 5.99,
+  description: '2 limes per purchase',
+  img: 'www.aws.com/img/j',
   category: 'Fruits'
   },
  ]
@@ -61,24 +61,24 @@ category_id: 1,
 name: 'Animal Products',
 products: [
  {
-  product_id: 1, 
-  name: 'Eggs', 
-  price: 5.99, 
-  description: '12 per pack', 
+  product_id: 1,
+  name: 'Eggs',
+  price: 5.99,
+  description: '12 per pack',
   img: 'www.aws.com/img/a',
-  seller: 
+  seller:
   {
    seller_id: 1,
    username: 'bmenz'
   }
  },
   {
-  product_id: 2, 
-  name: 'Milk', 
-  price: 4.99, 
-  description: '500ml per bottle', 
-  img: 'www.aws.com/img/b', 
-  seller: 
+  product_id: 2,
+  name: 'Milk',
+  price: 4.99,
+  description: '500ml per bottle',
+  img: 'www.aws.com/img/b',
+  seller:
   {
    seller_id: 2,
    username: 'ab_caloo'
@@ -93,29 +93,29 @@ products: [
 
 returns all products
 
-response body: 
+response body:
 [
  {
-  product_id: 1, 
-  name: 'Eggs', 
-  price: 5.99, 
-  description: '12 per pack', 
+  product_id: 1,
+  name: 'Eggs',
+  price: 5.99,
+  description: '12 per pack',
   img: 'www.aws.com/img/a',
   category: 'Animal Products'
-  seller: 
+  seller:
   {
    seller_id: 1,
    username: 'bmenz'
   }
  },
   {
-  product_id: 2, 
-  name: 'Milk', 
-  price: 4.99, 
-  description: '500ml per bottle', 
-  img: 'www.aws.com/img/b', 
+  product_id: 2,
+  name: 'Milk',
+  price: 4.99,
+  description: '500ml per bottle',
+  img: 'www.aws.com/img/b',
   category: 'Animal Products'
-  seller: 
+  seller:
   {
    seller_id: 2,
    username: 'ab_caloo'
@@ -136,7 +136,7 @@ request body:
  location: '123 tulip lane, Cairo, Egypt, 101010' //optional
 }
 
-response body: 
+response body:
 
 {
  user_id: 6
@@ -161,7 +161,7 @@ request body:
  img: 'http://website.com/img'
 }
 
-response body: 
+response body:
 
 {
  product_id: 17,
@@ -176,8 +176,6 @@ response body:
  img: 'http://website.com/img'
 }
 ```
-
-
 
 # Build Week Scaffolding for Node and PostgreSQL
 
