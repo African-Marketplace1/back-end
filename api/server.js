@@ -3,6 +3,8 @@ const helmet = require("helmet");
 const cors = require("cors");
 const db = require("./data/db-config");
 const usersRouter = require("./users/users-router");
+const categoriesRouter = require("./categories/categories-router");
+const productsRouter = require("./products/products-router");
 
 async function insertUser(user) {
   // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
@@ -22,6 +24,8 @@ server.use(helmet());
 server.use(cors());
 
 server.use("/users", usersRouter);
+server.use("/categories", categoriesRouter);
+server.use("/products", productsRouter);
 
 server.use((err, req, res, next) => {
   res.status(err.status || 500).json({

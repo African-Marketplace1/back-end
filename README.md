@@ -38,7 +38,7 @@ response body:
 
 returns all categories
 
-reponse body:
+response body:
 
 [
 {category_id: 1, name: 'Animal Products'},
@@ -50,9 +50,10 @@ reponse body:
 ```
 
 ```
-[GET] /categories/products
+[GET] /categories/:id
 
 returns products from a specific category
+(id refers to a category id)
 
 response body:
 
@@ -63,24 +64,24 @@ products: [
  {
   product_id: 1,
   name: 'Eggs',
-  price: 5.99,
+  price_usd: 5.99,
   description: '12 per pack',
   img: 'www.aws.com/img/a',
   seller:
   {
-   seller_id: 1,
+   user_id: 1,
    username: 'bmenz'
   }
  },
   {
   product_id: 2,
   name: 'Milk',
-  price: 4.99,
+  price_usd: 4.99,
   description: '500ml per bottle',
   img: 'www.aws.com/img/b',
   seller:
   {
-   seller_id: 2,
+   user_id: 2,
    username: 'ab_caloo'
   }
  },
@@ -98,26 +99,26 @@ response body:
  {
   product_id: 1,
   name: 'Eggs',
-  price: 5.99,
+  price_usd: 5.99,
   description: '12 per pack',
   img: 'www.aws.com/img/a',
   category: 'Animal Products'
   seller:
   {
-   seller_id: 1,
+   user_id: 1,
    username: 'bmenz'
   }
  },
   {
   product_id: 2,
   name: 'Milk',
-  price: 4.99,
+  price_usd: 4.99,
   description: '500ml per bottle',
   img: 'www.aws.com/img/b',
   category: 'Animal Products'
   seller:
   {
-   seller_id: 2,
+   user_id: 2,
    username: 'ab_caloo'
   }
  },
