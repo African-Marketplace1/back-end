@@ -39,8 +39,6 @@ const addProduct = async (seller_id, category_id, newProduct) => {
 const getCategoryByName = async (name) => {
   const category = await db("categories").where("category_name", name).first();
   return category.category_id;
-  // .first().category_id;
-  // return category_id;
 };
 
 module.exports = {
