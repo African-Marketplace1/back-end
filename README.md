@@ -41,10 +41,10 @@ returns all categories
 response body:
 
 [
-{category_id: 1, name: 'Animal Products'},
-{category_id: 2, name: 'Beans'},
-{category_id: 3, name: 'Cereals'},
-{category_id: 4, name: 'Fruits'},
+{category_id: 1, name: 'Animal Products', img: "www.aws.com/234"},
+{category_id: 2, name: 'Beans', img: "www.aws.com/sdf4"},
+{category_id: 3, name: 'Cereals', img: "www.aws.com/2d34"},
+{category_id: 4, name: 'Fruits', img: "www.aws.com/23af4"},
 ...
 ]
 ```

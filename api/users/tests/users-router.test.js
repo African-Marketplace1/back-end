@@ -39,7 +39,7 @@ describe("users-router", () => {
         username: "bmenz",
         password: "abc123",
         email: "bmenz@gmail.com",
-        img: null,
+        img: "https://images.pexels.com/photos/3785991/pexels-photo-3785991.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         location: "529W+7X Harare, Zimbabwe",
         products: [
           {

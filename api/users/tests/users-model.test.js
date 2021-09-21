@@ -34,7 +34,7 @@ describe("users-model", () => {
         username: "ab_caloo",
         password: "abc456",
         email: "ab@gmail.com",
-        img: null,
+        img: "https://images.pexels.com/photos/6194365/pexels-photo-6194365.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
         location: "567M+V8 Luanda, Angola",
         products: [
           {
