@@ -12,6 +12,8 @@
 
 This project uses a relational database created with PostgreSQL 13 and Knex as a SQL query builder.
 
+There are 3 tables in total
+
 Users
 
 | user_id | username |          password          |      email      |           img            |        location |
