@@ -70,6 +70,18 @@ router.put("/:id", checkIdExists, async (req, res, next) => {
   }
 });
 
+router.delete("/:id", checkIdExists, async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await Users.removeUser(id);
+    res
+      .status(200)
+      .json({ message: `user with id ${id} successfully deleted` });
+  } catch (err) {
+    next(err);
+  }
+});
+
 const buildToken = (user) => {
   const payload = {
     subject: user.user_id,

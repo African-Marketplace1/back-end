@@ -46,6 +46,10 @@ const updateUser = async (user_id, changes) => {
   return await getUserById(user_id);
 };
 
+const removeUser = async (user_id) => {
+  await db("users").where("user_id", user_id).del();
+};
+
 module.exports = {
   getUserById,
   getUserBy,
@@ -53,4 +57,5 @@ module.exports = {
   addProduct,
   getCategoryByName,
   updateUser,
+  removeUser,
 };

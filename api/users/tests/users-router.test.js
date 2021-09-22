@@ -299,4 +299,21 @@ describe("users-router", () => {
       expect(response.status).toBe(404);
     });
   });
+
+  describe("[DELETE] /users/:id", () => {
+    test("successfully deletes a user", async () => {
+      await request(server).delete("/users/2");
+      const users = await db("users");
+      expect(users).toHaveLength(2);
+    });
+    test("returns a status 404 on invalid id", async () => {
+      const response = await request(server).delete("/users/99");
+      expect(response.status).toBe(404);
+    });
+    test("removes the users products", async () => {
+      await request(server).delete("/users/2");
+      const products = await db("products");
+      expect(products).toHaveLength(3);
+    });
+  });
 });

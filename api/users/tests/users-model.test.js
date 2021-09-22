@@ -236,4 +236,14 @@ describe("users-model", () => {
       expect(updatedUser).toEqual(expected);
     });
   });
+
+  describe("removeUser", () => {
+    test("removes a user", async () => {
+      await User.removeUser(1);
+      const users = await db("users");
+      const products = await db("products");
+      expect(users).toHaveLength(2);
+      expect(products).toHaveLength(2);
+    });
+  });
 });

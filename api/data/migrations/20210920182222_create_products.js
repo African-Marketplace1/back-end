@@ -10,8 +10,8 @@ exports.up = async (knex) => {
       .notNullable()
       .references("user_id")
       .inTable("users")
-      .onUpdate("RESTRICT")
-      .onDelete("RESTRICT");
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
     products.string("img");
     products
       .integer("category")
@@ -19,8 +19,8 @@ exports.up = async (knex) => {
       .notNullable()
       .references("category_id")
       .inTable("categories")
-      .onUpdate("RESTRICT")
-      .onDelete("RESTRICT");
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
   });
 };
 

@@ -346,6 +346,16 @@ response body :
 }
 ```
 
+```
+[DELETE] /users/:id ('id' is a user_id)
+
+response body :
+
+{
+    "message": "user with id 2 successfully deleted"
+}
+```
+
 # Build Week Scaffolding for Node and PostgreSQL
 
 ## Video Tutorial
