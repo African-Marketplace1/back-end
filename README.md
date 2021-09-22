@@ -9,7 +9,7 @@
 - **deploy**: Deploys the main branch to Heroku.
 
 
-Endpoints: 
+## Endpoints: 
 
 ```
 [GET] /users/:id
