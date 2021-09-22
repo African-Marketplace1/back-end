@@ -29,4 +29,14 @@ router.put(
   }
 );
 
+router.delete("/:id", checkProductIdExists, async (req, res, next) => {
+  const product_id = req.params.id;
+  try {
+    const products = await Product.removeProduct(product_id);
+    res.status(200).json(products);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

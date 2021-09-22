@@ -90,4 +90,22 @@ describe("products-router", () => {
       expect(response.status).toBe(404);
     });
   });
+
+  describe("[DELETE] /products/:id", () => {
+    test("successfully removes a product", async () => {
+      await request(server).delete("/products/1");
+      const products = await db("products");
+      expect(products).toHaveLength(4);
+    });
+    test("returns the seller's remaining products", async () => {
+      const response = await request(server).delete("/products/1");
+      expect(response.body).toHaveLength(2);
+      expect(response.body[0].seller).toBe(1);
+      expect(response.body[1].seller).toBe(1);
+    });
+    test("returns 404 on invalid product id", async () => {
+      const response = await request(server).delete("/products/99");
+      expect(response.status).toBe(404);
+    });
+  });
 });

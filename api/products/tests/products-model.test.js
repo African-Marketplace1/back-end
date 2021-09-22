@@ -83,4 +83,16 @@ describe("users-model", () => {
       expect(response[2].seller).toBe(1);
     });
   });
+
+  describe("removeProduct", () => {
+    test("successfully removes a product", async () => {
+      await Product.removeProduct(1);
+      const products = await db("products");
+      expect(products).toHaveLength(4);
+    });
+    test("returns sellers remaining products", async () => {
+      const products = await Product.removeProduct(1);
+      expect(products).toHaveLength(2);
+    });
+  });
 });

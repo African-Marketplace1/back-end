@@ -30,4 +30,10 @@ const updateProduct = async (product_id, changes) => {
   return await db("products").where("seller", seller_id);
 };
 
-module.exports = { getAll, updateProduct, getSellerId };
+const removeProduct = async (product_id) => {
+  const seller_id = await getSellerId(product_id);
+  await db("products").where("product_id", product_id).del();
+  return db("products").where("seller", seller_id);
+};
+
+module.exports = { getAll, updateProduct, getSellerId, removeProduct };

@@ -276,6 +276,35 @@ response body: (returns all products for the specific seller)
 ]
 ```
 
+```
+[DELETE] /products/:id ('id' is the product_id)
+
+response body:
+
+(returns the sellers remaining products)
+
+[
+    {
+        "product_id": 2,
+        "name": "Avocado",
+        "price_usd": 2.99,
+        "description": "1 avocado per purchase",
+        "seller": 1,
+        "img": "https://www.washingtonian.com/wp-content/uploads/2020/02/iStock-1027572462-scaled-2048x1695.jpg",
+        "category": 4
+    },
+    {
+        "product_id": 3,
+        "name": "Beans Rosecoco",
+        "price_usd": 6.5,
+        "description": "2 lbs per bag",
+        "seller": 1,
+        "img": "https://assets.sainsburys-groceries.co.uk/gol/7693115/1/640x640.jpg",
+        "category": 2
+    }
+]
+```
+
 # Build Week Scaffolding for Node and PostgreSQL
 
 ## Video Tutorial
