@@ -253,4 +253,13 @@ describe("users-router", () => {
       expect(res.status).toBe(400);
     });
   });
+  // describe("[PUT] /users/:id (updating product)", () => {
+  //   test("updates product name and price", async () => {
+  //     await request(server)
+  //       .post("/users/1")
+  //       .send({ name: "chicken", price_usd: 12.99 });
+  //     const product = await db("products").where("product_id", "chicken").first();
+  //     expect(product).toBeTruthy();
+  //   });
+  // });
 });

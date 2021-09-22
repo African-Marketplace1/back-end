@@ -44,4 +44,43 @@ describe("users-model", () => {
       expect(product).toEqual(expected);
     });
   });
+  describe("getSellerId", () => {
+    test("returns a seller id when inputting product id", async () => {
+      const response = await Product.getSellerId(2);
+      expect(response).toBe(1);
+    });
+  });
+
+  describe("updateProduct", () => {
+    test("updates name, price_usd, description, img, and category", async () => {
+      const changes = {
+        name: "test",
+        price_usd: 11.99,
+        description: "test",
+        img: "test",
+        category: 8,
+      };
+      await Product.updateProduct(1, changes);
+      const product = await db("products").where("product_id", 1).first();
+      expect(product.name).toBe("test");
+      expect(product.price_usd).toBe(11.99);
+      expect(product.description).toBe("test");
+      expect(product.img).toBe("test");
+      expect(product.category).toBe(8);
+    });
+    test("returns all the products for that seller", async () => {
+      const changes = {
+        name: "test",
+        price_usd: 11.99,
+        description: "test",
+        img: "test",
+        category: 8,
+      };
+      const response = await Product.updateProduct(1, changes);
+      expect(response).toHaveLength(3);
+      expect(response[0].seller).toBe(1);
+      expect(response[1].seller).toBe(1);
+      expect(response[2].seller).toBe(1);
+    });
+  });
 });

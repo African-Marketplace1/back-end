@@ -60,6 +60,16 @@ router.post("/:id", categoryNameToId, checkIdExists, async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const products = await Users.updateProduct(req.body, id, 1);
+    res.status(201).json(products);
+  } catch (err) {
+    next(err);
+  }
+});
+
 const buildToken = (user) => {
   const payload = {
     subject: user.user_id,

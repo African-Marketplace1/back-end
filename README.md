@@ -232,6 +232,50 @@ response body:
 }
 ```
 
+```
+[PUT] /products/:id ('id' is referencing the product id)
+
+request body: (all properties in the request body are optional)
+
+{
+    name: 'changedName',
+    description: 'changedDescription',
+    category: 'Vegetables'
+}
+
+response body: (returns all products for the specific seller)
+
+[
+    {
+        "product_id": 2,
+        "name": "Avocado",
+        "price_usd": 2.99,
+        "description": "1 avocado per purchase",
+        "seller": 1,
+        "img": "https://www.washingtonian.com/wp-content/uploads/2020/02/iStock-1027572462-scaled-2048x1695.jpg",
+        "category": 4
+    },
+    {
+        "product_id": 3,
+        "name": "Beans Rosecoco",
+        "price_usd": 6.5,
+        "description": "2 lbs per bag",
+        "seller": 1,
+        "img": "https://assets.sainsburys-groceries.co.uk/gol/7693115/1/640x640.jpg",
+        "category": 2
+    },
+    {
+        "product_id": 1,
+        "name": "changedName",
+        "price_usd": 9.99,
+        "description": "changedDescription",
+        "seller": 1,
+        "img": "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-eggs-480x320@2x.webp",
+        "category": 8
+    }
+]
+```
+
 # Build Week Scaffolding for Node and PostgreSQL
 
 ## Video Tutorial

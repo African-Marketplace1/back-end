@@ -19,4 +19,15 @@ const getAll = async () => {
   return products;
 };
 
-module.exports = { getAll };
+const getSellerId = async (product_id) => {
+  const product = await db("products").where("product_id", product_id).first();
+  return product.seller;
+};
+
+const updateProduct = async (product_id, changes) => {
+  await db("products").where("product_id", product_id).update(changes);
+  const seller_id = await getSellerId(product_id);
+  return await db("products").where("seller", seller_id);
+};
+
+module.exports = { getAll, updateProduct, getSellerId };
