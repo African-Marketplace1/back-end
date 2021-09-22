@@ -8,6 +8,30 @@
 - **test**: Runs tests.
 - **deploy**: Deploys the main branch to Heroku.
 
+## Database Design
+
+This project uses a relational databse created with PostgreSQL 13 and Knex as a SQL query builder.
+
+Users
+
+| user_id      | username       | password       | email |img   | location|
+| :---         |     :---:      |          :---: |:---:  |:---: |--:      |
+| 1   | bmenz     | sdfhljk4.sd;fkjh34r.sdjfh3     | bmenz@gmail.com   | http://www.aws.com/img/2| 123 test lane|
+
+
+Products
+
+| product_id|name   |price_usd| description|seller| img| categry|
+| :---      | :---: | :---:   | :---:      |:---:|:---:|---:|
+| 1   | Eggs | 5.99 | 12 per pack   | 1| http://www.aws.com/img/2| 1|
+
+Categories
+|category_id|name|
+|:--|--:|
+|1|Animal Products|
+|2| Beans|
+|3|Cereals|
+|4|Fruits|
 
 ## Endpoints: 
 
