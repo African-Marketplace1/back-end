@@ -10,20 +10,23 @@
 
 ## Database Design
 
-This project uses a relational databse created with PostgreSQL 13 and Knex as a SQL query builder.
+This project uses a relational database created with PostgreSQL 13 and Knex as a SQL query builder.
 
 Users
 
-| user_id      | username       | password       | email |img   | location|
-| :---         |     :---:      |          :---: |:---:  |:---: |--:      |
-| 1   | bmenz     | sdfhljk4.sd;fkjh34r.sdjfh3     | bmenz@gmail.com   | http://www.aws.com/img/2| 123 test lane|
-
+| user_id | username |          password          |      email      |           img            |        location |
+| :------ | :------: | :------------------------: | :-------------: | :----------------------: | --------------: |
+| 1       |  bmenz   | sdfhljk4.sd;fkjh34r.sdjfh3 | bmenz@gmail.com | http://www.aws.com/img/2 |   123 test lane |
+| 2       | ab_caloo |  034fhad.sf23-982.sdjkh23  |  ab@gmail.com   | http://www.aws.com/img/3 | 123 tulip court |
+| 3       | lulu_app |  asdf023/.asdf2.-sf23409   | lulu@gmail.com  | http://www.aws.com/img/4 |  456 abc street |
 
 Products
 
-| product_id|name   |price_usd| description|seller| img| categry|
-| :---      | :---: | :---:   | :---:      |:---:|:---:|---:|
-| 1   | Eggs | 5.99 | 12 per pack   | 1| http://www.aws.com/img/2| 1|
+| product_id |    name     | price_usd | description  | seller |           img            | category |
+| :--------- | :---------: | :-------: | :----------: | :----: | :----------------------: | -------: |
+| 1          |    Eggs     |   5.99    | 12 per pack  |   1    | http://www.aws.com/img/a |        1 |
+| 2          |   Apples    |   7.99    |  8 per pack  |   1    | http://www.aws.com/img/b |        4 |
+| 3          | Black Beans |   5.99    | 500g per bag |   2    | http://www.aws.com/img/c |        2 |
 
 Categories
 |category_id|name|
@@ -33,7 +36,7 @@ Categories
 |3|Cereals|
 |4|Fruits|
 
-## Endpoints: 
+## Endpoints:
 
 ```
 [GET] /users/:id
@@ -392,7 +395,3 @@ response body :
     "message": "user with id 2 successfully deleted"
 }
 ```
-
-
-
-
