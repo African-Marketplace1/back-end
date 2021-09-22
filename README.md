@@ -305,6 +305,47 @@ response body:
 ]
 ```
 
+```
+[PUT] /users/:id ('id' is the user_id)
+
+request body (all properties are optional):
+
+{
+   username: "test",
+   email: "test",
+   img: "test"
+}
+
+response body :
+
+{
+    "user_id": 2,
+    "username": "test",
+    "password": "abc456",
+    "email": "test",
+    "img": "test",
+    "location": "567M+V8 Luanda, Angola",
+    "products": [
+        {
+            "product_id": 4,
+            "name": "Milk",
+            "price_usd": 4.99,
+            "description": "500 ml per bottle",
+            "img": "https://images.pexels.com/photos/7573152/pexels-photo-7573152.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+            "category_name": "Animal Products"
+        },
+        {
+            "product_id": 5,
+            "name": "Limes",
+            "price_usd": 5.99,
+            "description": "2 Limes per purchase",
+            "img": "https://crownmarketonline.com/wp-content/uploads/2020/05/Limes.jpg",
+            "category_name": "Fruits"
+        }
+    ]
+}
+```
+
 # Build Week Scaffolding for Node and PostgreSQL
 
 ## Video Tutorial

@@ -41,10 +41,16 @@ const getCategoryByName = async (name) => {
   return category.category_id;
 };
 
+const updateUser = async (user_id, changes) => {
+  await db("users").where("user_id", user_id).update(changes);
+  return await getUserById(user_id);
+};
+
 module.exports = {
   getUserById,
   getUserBy,
   addUser,
   addProduct,
   getCategoryByName,
+  updateUser,
 };

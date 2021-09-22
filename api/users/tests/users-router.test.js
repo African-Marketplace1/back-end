@@ -253,13 +253,50 @@ describe("users-router", () => {
       expect(res.status).toBe(400);
     });
   });
-  // describe("[PUT] /users/:id (updating product)", () => {
-  //   test("updates product name and price", async () => {
-  //     await request(server)
-  //       .post("/users/1")
-  //       .send({ name: "chicken", price_usd: 12.99 });
-  //     const product = await db("products").where("product_id", "chicken").first();
-  //     expect(product).toBeTruthy();
-  //   });
-  // });
+  describe("[PUT] /users/:id", () => {
+    test("updates username, email, img", async () => {
+      const changes = { username: "test", email: "test", img: "test" };
+      await request(server).put("/users/1").send(changes);
+      const user = await db("users").where("user_id", 1).first();
+      expect(user.username).toBe("test");
+      expect(user.email).toBe("test");
+      expect(user.img).toBe("test");
+    });
+    test("returns the correct shape", async () => {
+      const changes = { username: "test", email: "test", img: "test" };
+      const response = await request(server).put("/users/2").send(changes);
+      const expected = {
+        user_id: 2,
+        username: "test",
+        password: "abc456",
+        email: "test",
+        img: "test",
+        location: "567M+V8 Luanda, Angola",
+        products: [
+          {
+            product_id: 4,
+            name: "Milk",
+            price_usd: 4.99,
+            description: "500 ml per bottle",
+            img: "https://images.pexels.com/photos/7573152/pexels-photo-7573152.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+            category_name: "Animal Products",
+          },
+          {
+            product_id: 5,
+            name: "Limes",
+            price_usd: 5.99,
+            description: "2 Limes per purchase",
+            img: "https://crownmarketonline.com/wp-content/uploads/2020/05/Limes.jpg",
+            category_name: "Fruits",
+          },
+        ],
+      };
+      expect(response.body).toEqual(expected);
+    });
+    test("returns 404 on invalid id", async () => {
+      const changes = { username: "test", email: "test", img: "test" };
+      const response = await request(server).put("/users/99").send(changes);
+      expect(response.status).toBe(404);
+    });
+  });
 });
