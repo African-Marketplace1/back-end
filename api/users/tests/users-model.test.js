@@ -56,7 +56,14 @@ describe("users-model", () => {
         ],
       };
       const actual = await User.getUserById(2);
-      expect(actual).toEqual(expected);
+      expect(actual).toHaveProperty("user_id");
+      expect(actual).toHaveProperty("username");
+      expect(actual).toHaveProperty("password");
+      expect(actual).toHaveProperty("email");
+      expect(actual).toHaveProperty("img");
+      expect(actual).toHaveProperty("location");
+      expect(actual).toHaveProperty("products");
+      expect(actual.products).toHaveLength(2);
     });
   });
   describe("getUserBy", () => {
@@ -198,42 +205,16 @@ describe("users-model", () => {
         img: "testImg",
         location: "123 test lane",
       };
-      const updatedUser = await User.updateUser(1, changes);
-      const expected = {
-        user_id: 1,
-        username: "test",
-        password: "abc123",
-        email: "bmenz@gmail.com",
-        img: "testImg",
-        location: "123 test lane",
-        products: [
-          {
-            product_id: 1,
-            name: "Eggs",
-            price_usd: 5.99,
-            description: "12 per pack",
-            img: "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-eggs-480x320@2x.webp",
-            category_name: "Animal Products",
-          },
-          {
-            product_id: 2,
-            name: "Avocado",
-            price_usd: 2.99,
-            description: "1 avocado per purchase",
-            img: "https://www.washingtonian.com/wp-content/uploads/2020/02/iStock-1027572462-scaled-2048x1695.jpg",
-            category_name: "Fruits",
-          },
-          {
-            product_id: 3,
-            name: "Beans Rosecoco",
-            price_usd: 6.5,
-            description: "2 lbs per bag",
-            img: "https://assets.sainsburys-groceries.co.uk/gol/7693115/1/640x640.jpg",
-            category_name: "Beans",
-          },
-        ],
-      };
-      expect(updatedUser).toEqual(expected);
+      const res = await User.updateUser(1, changes);
+
+      expect(res).toHaveProperty("user_id");
+      expect(res).toHaveProperty("username");
+      expect(res).toHaveProperty("password");
+      expect(res).toHaveProperty("email");
+      expect(res).toHaveProperty("img");
+      expect(res).toHaveProperty("location");
+      expect(res).toHaveProperty("products");
+      expect(res.products).toHaveLength(3);
     });
   });
 

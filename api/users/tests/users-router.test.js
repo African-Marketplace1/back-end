@@ -34,42 +34,15 @@ describe("users-router", () => {
       expect(res.status).toBe(404);
     });
     test("returns proper shape", async () => {
-      const expected = {
-        user_id: 1,
-        username: "bmenz",
-        password: "abc123",
-        email: "bmenz@gmail.com",
-        img: "https://images.pexels.com/photos/3785991/pexels-photo-3785991.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-        location: "529W+7X Harare, Zimbabwe",
-        products: [
-          {
-            product_id: 1,
-            name: "Eggs",
-            price_usd: 5.99,
-            description: "12 per pack",
-            img: "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-eggs-480x320@2x.webp",
-            category_name: "Animal Products",
-          },
-          {
-            product_id: 2,
-            name: "Avocado",
-            price_usd: 2.99,
-            description: "1 avocado per purchase",
-            img: "https://www.washingtonian.com/wp-content/uploads/2020/02/iStock-1027572462-scaled-2048x1695.jpg",
-            category_name: "Fruits",
-          },
-          {
-            product_id: 3,
-            name: "Beans Rosecoco",
-            price_usd: 6.5,
-            description: "2 lbs per bag",
-            img: "https://assets.sainsburys-groceries.co.uk/gol/7693115/1/640x640.jpg",
-            category_name: "Beans",
-          },
-        ],
-      };
       const res = await request(server).get("/users/1");
-      expect(res.body).toEqual(expected);
+      expect(res.body).toHaveProperty("user_id");
+      expect(res.body).toHaveProperty("username");
+      expect(res.body).toHaveProperty("password");
+      expect(res.body).toHaveProperty("email");
+      expect(res.body).toHaveProperty("img");
+      expect(res.body).toHaveProperty("location");
+      expect(res.body).toHaveProperty("products");
+      expect(res.body.products).toHaveLength(3);
     });
   });
   describe("[POST] /users/register", () => {
@@ -264,34 +237,15 @@ describe("users-router", () => {
     });
     test("returns the correct shape", async () => {
       const changes = { username: "test", email: "test", img: "test" };
-      const response = await request(server).put("/users/2").send(changes);
-      const expected = {
-        user_id: 2,
-        username: "test",
-        password: "abc456",
-        email: "test",
-        img: "test",
-        location: "567M+V8 Luanda, Angola",
-        products: [
-          {
-            product_id: 4,
-            name: "Milk",
-            price_usd: 4.99,
-            description: "500 ml per bottle",
-            img: "https://images.pexels.com/photos/7573152/pexels-photo-7573152.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-            category_name: "Animal Products",
-          },
-          {
-            product_id: 5,
-            name: "Limes",
-            price_usd: 5.99,
-            description: "2 Limes per purchase",
-            img: "https://crownmarketonline.com/wp-content/uploads/2020/05/Limes.jpg",
-            category_name: "Fruits",
-          },
-        ],
-      };
-      expect(response.body).toEqual(expected);
+      const res = await request(server).put("/users/2").send(changes);
+      expect(res.body).toHaveProperty("user_id");
+      expect(res.body).toHaveProperty("username");
+      expect(res.body).toHaveProperty("password");
+      expect(res.body).toHaveProperty("email");
+      expect(res.body).toHaveProperty("img");
+      expect(res.body).toHaveProperty("location");
+      expect(res.body).toHaveProperty("products");
+      expect(res.body.products).toHaveLength(2);
     });
     test("returns 404 on invalid id", async () => {
       const changes = { username: "test", email: "test", img: "test" };
