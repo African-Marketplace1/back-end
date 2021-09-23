@@ -18,9 +18,9 @@ server.use(
       maxAge: 1 * 24 * 60 * 10,
       secure: false,
     },
-    httpOnly: false,
+    httpOnly: true,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: new Store({
       knex,
       createTable: true,
