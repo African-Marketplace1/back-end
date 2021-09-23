@@ -270,4 +270,12 @@ describe("users-router", () => {
       expect(products).toHaveLength(3);
     });
   });
+
+  describe("[GET] /users/logout", () => {
+    test("logout route is connected", async () => {
+      const response = await request(server).get("/users/logout");
+      expect(response.status).toBe(400);
+      expect(response.body.message).toBe("You are not logged in");
+    });
+  });
 });

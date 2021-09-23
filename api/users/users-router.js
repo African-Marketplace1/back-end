@@ -11,6 +11,23 @@ const {
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "shh";
 
+router.get("/logout", async (req, res) => {
+  if (req.session.user) {
+    req.session.destroy((err) => {
+      if (err) {
+        res.status(500).json({
+          message: "There was an error deleting your session",
+          error: err,
+        });
+      } else {
+        res.status(200).json({ message: "Logout successful; Session deleted" });
+      }
+    });
+  } else {
+    res.status(400).json({ message: "You are not logged in" });
+  }
+});
+
 router.get("/:id", checkIdExists, async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -25,6 +42,8 @@ router.post("/login", checkLoginBody, async (req, res, next) => {
   const { password } = req.login;
   try {
     if (bcrypt.compareSync(password, req.user.password)) {
+      req.session.user = req.user;
+      console.log("session started");
       const token = buildToken(req.user);
       res.status(200).json({
         message: `Welcome back ${req.user.username}`,
