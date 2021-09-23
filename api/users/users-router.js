@@ -26,7 +26,7 @@ router.post("/login", checkLoginBody, async (req, res, next) => {
   const { password } = req.login;
   try {
     if (bcrypt.compareSync(password, req.user.password)) {
-      const token = buildToken(req.user);
+      const token = await buildToken(req.user);
       res.status(200).json({
         message: `Welcome ${req.user.username}`,
         token: token,
@@ -84,17 +84,8 @@ router.delete("/:id", checkIdExists, async (req, res, next) => {
 });
 
 const buildToken = async (user) => {
-  let data;
-
-  try {
-    data = await Users.getUserById(user.user_id);
-  } catch (err) {
-    data = null;
-  }
   const payload = {
-    subject: user.user_id,
-    user: data,
-    // username: user.username,
+    ...(await Users.getUserById(user.user_id)),
   };
   const options = {
     expiresIn: "2d",
