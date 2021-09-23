@@ -4,32 +4,9 @@ const cors = require("cors");
 const usersRouter = require("./users/users-router");
 const categoriesRouter = require("./categories/categories-router");
 const productsRouter = require("./products/products-router");
-const session = require("express-session");
-const Store = require("connect-session-knex")(session);
-const knex = require("./data/db-config");
 
 const server = express();
 
-server.use(
-  session({
-    name: "chocolatechip",
-    secret: "you cant see me",
-    cookie: {
-      maxAge: 1 * 24 * 60 * 10,
-      secure: false,
-    },
-    httpOnly: false,
-    resave: true,
-    saveUninitialized: false,
-    store: new Store({
-      knex,
-      createTable: true,
-      clearInterval: 1000 * 60 * 20,
-      tablename: "sessions",
-      sidfieldname: "sid",
-    }),
-  })
-);
 server.use(express.json());
 server.use(helmet());
 server.use(cors());

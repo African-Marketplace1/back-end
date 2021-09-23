@@ -12,28 +12,6 @@ const {
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "shh";
 
-router.get("/login", (req, res) => {
-  req.session.user = { username: "bmenz" };
-  res.status(200).json({ message: "login worked" });
-});
-
-router.get("/logout", async (req, res) => {
-  if (req.session.user) {
-    req.session.destroy((err) => {
-      if (err) {
-        res.status(500).json({
-          message: "There was an error deleting your session",
-          error: err,
-        });
-      } else {
-        res.status(200).json({ message: "Logout successful; Session deleted" });
-      }
-    });
-  } else {
-    res.status(400).json({ message: "You are not logged in" });
-  }
-});
-
 router.get("/:id", checkIdExists, async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -44,30 +22,23 @@ router.get("/:id", checkIdExists, async (req, res, next) => {
   }
 });
 
-router.post(
-  "/login",
-  checkIfSession,
-  checkLoginBody,
-  async (req, res, next) => {
-    const { password } = req.login;
-    try {
-      if (bcrypt.compareSync(password, req.user.password)) {
-        req.session.user = req.user;
-        console.log("session started");
-        const token = buildToken(req.user);
-        res.status(200).json({
-          message: `Welcome ${req.user.username}`,
-          token: token,
-          user: req.user,
-        });
-      } else {
-        next({ status: 401, message: "Invalid Password" });
-      }
-    } catch (err) {
-      next(err);
+router.post("/login", checkLoginBody, async (req, res, next) => {
+  const { password } = req.login;
+  try {
+    if (bcrypt.compareSync(password, req.user.password)) {
+      const token = buildToken(req.user);
+      res.status(200).json({
+        message: `Welcome ${req.user.username}`,
+        token: token,
+        user: req.user,
+      });
+    } else {
+      next({ status: 401, message: "Invalid Password" });
     }
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 router.post("/register", checkRegisterBody, async (req, res, next) => {
   const { password } = req.body;
@@ -112,10 +83,18 @@ router.delete("/:id", checkIdExists, async (req, res, next) => {
   }
 });
 
-const buildToken = (user) => {
+const buildToken = async (user) => {
+  let data;
+
+  try {
+    data = await Users.getUserById(user.user_id);
+  } catch (err) {
+    data = null;
+  }
   const payload = {
     subject: user.user_id,
-    username: user.username,
+    user: data,
+    // username: user.username,
   };
   const options = {
     expiresIn: "2d",
