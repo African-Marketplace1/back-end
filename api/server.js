@@ -19,8 +19,8 @@ server.use(
       secure: false,
     },
     httpOnly: true,
-    resave: false,
-    saveUninitialized: true,
+    resave: true,
+    saveUninitialized: false,
     store: new Store({
       knex,
       createTable: true,
