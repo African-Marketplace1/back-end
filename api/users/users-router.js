@@ -11,6 +11,14 @@ const {
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "shh";
 
+router.get("/session", async (req, res) => {
+  if (req.session.user) {
+    res.status(200).json({ user: req.session.user });
+  } else {
+    res.status(401).json({ message: "no user found" });
+  }
+});
+
 router.get("/logout", async (req, res) => {
   if (req.session.user) {
     req.session.destroy((err) => {
