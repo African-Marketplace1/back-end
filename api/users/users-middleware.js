@@ -1,4 +1,6 @@
+const jwt = require("jsonwebtoken");
 const User = require("./users-model");
+const JWT_SECRET = process.env.JWT_SECRET || "shh";
 
 const checkIdExists = async (req, res, next) => {
   const { id } = req.params;
@@ -69,9 +71,34 @@ const categoryNameToId = async (req, res, next) => {
   }
 };
 
+const checkIfSession = (req, res, next) => {
+  if (req.session.user) {
+    const token = buildToken(req.session.user);
+    res.status(200).json({
+      message: `Hey ${req.session.user.username}, session already exists`,
+      token: token,
+      user: req.session.user,
+    });
+  } else {
+    console.log("no session");
+    next();
+  }
+};
+
+const buildToken = (user) => {
+  const payload = {
+    subject: user.user_id,
+    username: user.username,
+  };
+  const options = {
+    expiresIn: "2d",
+  };
+  return jwt.sign(payload, JWT_SECRET, options);
+};
 module.exports = {
   categoryNameToId,
   checkIdExists,
   checkLoginBody,
   checkRegisterBody,
+  checkIfSession,
 };

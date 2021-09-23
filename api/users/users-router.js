@@ -7,17 +7,10 @@ const {
   checkIdExists,
   checkLoginBody,
   checkRegisterBody,
+  checkIfSession,
 } = require("./users-middleware");
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "shh";
-
-router.get("/session", async (req, res) => {
-  if (req.session.user) {
-    res.status(200).json({ user: req.session.user });
-  } else {
-    res.status(401).json({ message: "no user found" });
-  }
-});
 
 router.get("/logout", async (req, res) => {
   if (req.session.user) {
@@ -46,25 +39,30 @@ router.get("/:id", checkIdExists, async (req, res, next) => {
   }
 });
 
-router.post("/login", checkLoginBody, async (req, res, next) => {
-  const { password } = req.login;
-  try {
-    if (bcrypt.compareSync(password, req.user.password)) {
-      req.session.user = req.user;
-      console.log("session started");
-      const token = buildToken(req.user);
-      res.status(200).json({
-        message: `Welcome back ${req.user.username}`,
-        token: token,
-        user: req.user,
-      });
-    } else {
-      next({ status: 401, message: "Invalid Password" });
+router.post(
+  "/login",
+  checkIfSession,
+  checkLoginBody,
+  async (req, res, next) => {
+    const { password } = req.login;
+    try {
+      if (bcrypt.compareSync(password, req.user.password)) {
+        req.session.user = req.user;
+        console.log("session started");
+        const token = buildToken(req.user);
+        res.status(200).json({
+          message: `Welcome ${req.user.username}`,
+          token: token,
+          user: req.user,
+        });
+      } else {
+        next({ status: 401, message: "Invalid Password" });
+      }
+    } catch (err) {
+      next(err);
     }
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 router.post("/register", checkRegisterBody, async (req, res, next) => {
   const { password } = req.body;
