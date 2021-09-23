@@ -18,7 +18,7 @@ server.use(
       maxAge: 1 * 24 * 60 * 10,
       secure: false,
     },
-    httpOnly: true,
+    httpOnly: false,
     resave: true,
     saveUninitialized: false,
     store: new Store({
