@@ -85,7 +85,7 @@ router.delete("/:id", checkIdExists, async (req, res, next) => {
 
 const buildToken = async (user) => {
   const payload = {
-    ...(await Users.getUserById(user.user_id)),
+    user: await Users.getUserById(user.user_id),
   };
   const options = {
     expiresIn: "2d",
