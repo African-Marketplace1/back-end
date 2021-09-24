@@ -12,6 +12,15 @@ const {
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "shh";
 
+router.get("/", async (req, res, next) => {
+  try {
+    const response = await Users.getAllUsers();
+    res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/:id", checkIdExists, async (req, res, next) => {
   const { id } = req.params;
   try {

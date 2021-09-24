@@ -227,4 +227,23 @@ describe("users-model", () => {
       expect(products).toHaveLength(2);
     });
   });
+
+  describe("getAllUsers", () => {
+    test("returns 3 users", async () => {
+      const users = await User.getAllUsers();
+      expect(users).toHaveLength(3);
+    });
+    test("each user has the correct properties", async () => {
+      const users = await User.getAllUsers();
+      expect(users[0]).toHaveProperty("username");
+      expect(users[0]).toHaveProperty("password");
+      expect(users[0]).toHaveProperty("products");
+      expect(users[0]).toHaveProperty("img");
+      expect(users[0]).toHaveProperty("location");
+    });
+    test("returns the products for each user", async () => {
+      const users = await User.getAllUsers();
+      expect(users[0].products).toHaveLength(3);
+    });
+  });
 });

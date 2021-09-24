@@ -270,4 +270,15 @@ describe("users-router", () => {
       expect(products).toHaveLength(3);
     });
   });
+
+  describe("[GET] /users", () => {
+    test("returns 3 users", async () => {
+      const response = await request(server).get("/users");
+      expect(response.body).toHaveLength(3);
+    });
+    test("return status 200", async () => {
+      const response = await request(server).get("/users");
+      expect(response.status).toBe(200);
+    });
+  });
 });

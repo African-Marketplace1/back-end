@@ -1,5 +1,23 @@
 const db = require("../data/db-config");
 
+const getAllUsers = async () => {
+  const users = await db("users");
+  const products = await db("products as p")
+    .select("p.*", "c.category_name")
+    .join("categories as c", "p.category", "c.category_id");
+
+  products.forEach((prod) => {
+    delete prod.category;
+  });
+
+  users.forEach((user) => {
+    user.products = products.filter((prod) => {
+      return prod.seller == user.user_id;
+    });
+  });
+  return users;
+};
+
 const getUserById = async (id) => {
   const user = await db("users").where("user_id", id).first();
   const products = await db("products as p")
@@ -58,4 +76,5 @@ module.exports = {
   getCategoryByName,
   updateUser,
   removeUser,
+  getAllUsers,
 };
